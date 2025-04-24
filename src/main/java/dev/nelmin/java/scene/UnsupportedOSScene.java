@@ -5,7 +5,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import lombok.Getter;
+import lombok.experimental.Accessors;
 
+@Accessors(fluent = true)
 public class UnsupportedOSScene {
     @Getter
     private final Scene scene;

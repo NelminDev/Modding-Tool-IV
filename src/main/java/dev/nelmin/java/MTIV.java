@@ -1,8 +1,10 @@
 package dev.nelmin.java;
 
 import dev.nelmin.java.application.NDApp;
+import dev.nelmin.java.configuration.NDString;
 import dev.nelmin.java.scene.FilePickerScene;
 import dev.nelmin.java.scene.UnsupportedOSScene;
+import dev.nelmin.java.scene.mods.Dashboard;
 import javafx.scene.Scene;
 
 import java.io.IOException;
@@ -14,13 +16,42 @@ public class MTIV extends NDApp {
         String osName = System.getProperty("os.name").toLowerCase();
         if (!osName.contains("windows")) {
             stage(
-                    new UnsupportedOSScene().getScene(),
+                    new UnsupportedOSScene().scene(),
                     "Unsupported Operating System"
             );
             return;
         }
 
+        NDString defaultGameVersion = config().getNDString("default");
+        NDString gameVersion = config().getNDString("game." + defaultGameVersion.value());
+        if (defaultGameVersion.isBlankOrNull() || isGameVersionInvalid(defaultGameVersion.value()) || gameVersion.isBlankOrNull())
+            openFilePicker();
+        else {
+            stage(
+                    new Dashboard().scene(),
+                    "Dashboard"
+            );
+        }
+    }
 
+    public static void main(String[] args) {
+        launch();
+    }
+
+    public void stage(Scene scene, String title) {
+        setTitle(title);
+        stage().setScene(scene);
+        stage().show();
+    }
+
+    private boolean isGameVersionInvalid(String gameVersion) {
+        return switch (gameVersion) {
+            case "1.0.4.0", "1.0.7.0", "1.0.8.0", "1.2.0.59" -> false;
+            default -> true;
+        };
+    }
+
+    private void openFilePicker() {
         stage(
                 new FilePickerScene(
                         (path, version) -> {
@@ -35,15 +66,5 @@ public class MTIV extends NDApp {
                 ).scene(),
                 "Select your GTAIV.exe"
         );
-    }
-
-    public static void main(String[] args) {
-        launch();
-    }
-
-    public void stage(Scene scene, String title) {
-        setTitle(title);
-        stage().setScene(scene);
-        stage().show();
     }
 }
