@@ -1,15 +1,17 @@
-package dev.nelmin.java;
+package dev.nelmin.java.application;
 
 import dev.nelmin.java.configuration.JSONConfiguration;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import lombok.Getter;
+import lombok.experimental.Accessors;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 
-public abstract class NDApplication extends Application {
+@Accessors(fluent = true)
+public abstract class NDApp extends Application {
     @Getter private Stage stage;
 
     @Override
@@ -21,8 +23,10 @@ public abstract class NDApplication extends Application {
 
     public abstract void start() throws IOException;
 
-    public void setTitle(String title) {
-        stage.setTitle(String.format("ND Modding Tool IV - %s", title));
+    public void setTitle(@Nullable String title) {
+        if (title == null || title.isBlank())
+            stage.setTitle(String.format("ND Modding Tool IV - %s", title));
+        else stage.setTitle("ND Modding Tool IV");
     }
 
     // RESOURCE MANAGEMENT (src/main/resources) - INSPIRED BY THE BUKKIT API
@@ -41,8 +45,7 @@ public abstract class NDApplication extends Application {
      */
     public void saveAndLoadConfig() throws IOException {
         saveResource("config.json");
-        String filePath = System.getProperty("user.dir") + File.separator + "config.json";
-        this.config = JSONConfiguration.loadConfiguration(Path.of(filePath).toFile());
+        this.config = JSONConfiguration.loadConfiguration(new File(System.getProperty("user.dir"), "config.json"));
     }
 
     /**

@@ -1,11 +1,17 @@
-module dev.nelmin.java.mtiv {
+module dev.nelmin.java {
     requires javafx.controls;
-    requires javafx.fxml;
 
     requires org.controlsfx.controls;
     requires net.synedra.validatorfx;
     requires org.kordamp.ikonli.javafx;
+    requires org.jetbrains.annotations;
+    requires com.google.gson;
+    requires java.logging;
+    requires static lombok;
+    requires com.sun.jna.platform;
+    requires com.sun.jna;
 
-    opens dev.nelmin.java.mtiv to javafx.fxml;
-    exports dev.nelmin.java.mtiv;
+    exports dev.nelmin.java;
+    exports dev.nelmin.java.configuration;
+    exports dev.nelmin.java.application;
 }

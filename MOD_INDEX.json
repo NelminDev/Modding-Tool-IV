@@ -1,49 +1,7 @@
 {
+  "$schema": "https://gist.githubusercontent.com/NelminDev/ab2bae3a6aefe9e2603a116ebaf167a5/raw/6c444e869d66704ecd6c1e5a07bcff698d691105/MTIV-INDEX.schema.json",
   "meta": {
     "last_update": "2025-05-01T12:00:00Z"
   },
-  "mods": [
-    {
-      "id": "author-modname",
-      "name": "",
-      "authors": [""],
-      "description": "",
-      "links": {
-        "website": "",
-        "source_code": ""
-      },
-      "versions": [
-        {
-          "version": "",
-          "file": {
-            "download": "",
-            "sha512": "",
-            "file_size": 1
-          },
-          "release_date": "2025-05-01",
-          "dependencies": [""],
-          "compatibility": {
-            "game_versions": [""],
-            "incompatible_mods": [""]
-          },
-          "requirements":{
-            "cpu": {
-              "min": "",
-              "suggested": ""
-            },
-            "gpu": {
-              "min": "",
-              "suggested": ""
-            },
-            "ram_gb": {
-              "min": "",
-              "suggested": ""
-            },
-            "storage_gb": ""
-          }
-        }
-      ],
-      "tags": [""]
-    }
-  ]
+  "mods": []
 }

@@ -1,38 +1,49 @@
 package dev.nelmin.java;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import dev.nelmin.java.configuration.JSONConfiguration;
+import dev.nelmin.java.application.NDApp;
 import dev.nelmin.java.scene.FilePickerScene;
-import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import dev.nelmin.java.scene.UnsupportedOSScene;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 
-public class HelloApplication extends NDApplication {
+public class MTIV extends NDApp {
 
     @Override
-    public void start(Stage stage) throws IOException {
-        saveAndLoadConfig();
+    public void start() {
+        String osName = System.getProperty("os.name").toLowerCase();
+        if (!osName.contains("windows")) {
+            stage(
+                    new UnsupportedOSScene().getScene(),
+                    "Unsupported Operating System"
+            );
+            return;
+        }
 
-        Scene scene = new FilePickerScene().getScene();
 
-        stage.setTitle("JSON Configuration Demo");
-        stage.setScene(scene);
-        stage.show();
+        stage(
+                new FilePickerScene(
+                        (path, version) -> {
+                            config().set("game.default", version);
+                            config().set(String.format("game.%s.directory", version.replace(".", "\\.")), path.toString());
+                            try {
+                                config().save();
+                            } catch (IOException e) {
+                                System.err.println("Failed to save configuration: " + e.getMessage());
+                            }
+                        }
+                ).scene(),
+                "Select your GTAIV.exe"
+        );
     }
 
     public static void main(String[] args) {
         launch();
+    }
+
+    public void stage(Scene scene, String title) {
+        setTitle(title);
+        stage().setScene(scene);
+        stage().show();
     }
 }
