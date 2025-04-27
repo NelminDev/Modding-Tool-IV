@@ -214,7 +214,7 @@ public class FilePickerScene {
             int revision = versionInfo.getFileVersionRevision();
             int build = versionInfo.getFileVersionBuild();
 
-            return String.format("%d.%d.%d.%d", major, minor, revision, build);
+            return String.format("%d%d%d%d", major, minor, revision, build);
         } catch (LastErrorException e) {
             return "Unknown (Error: " + e.getMessage() + ")";
         }

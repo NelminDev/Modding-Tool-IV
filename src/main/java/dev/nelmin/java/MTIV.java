@@ -46,7 +46,7 @@ public class MTIV extends NDApp {
 
     private boolean isGameVersionInvalid(String gameVersion) {
         return switch (gameVersion) {
-            case "1.0.4.0", "1.0.7.0", "1.0.8.0", "1.2.0.59" -> false;
+            case "1040", "1070", "1080", "12059" -> false;
             default -> true;
         };
     }

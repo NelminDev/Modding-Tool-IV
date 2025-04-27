@@ -31,7 +31,7 @@ public abstract class NDApp extends Application {
 
     // RESOURCE MANAGEMENT (src/main/resources) - INSPIRED BY THE BUKKIT API
     @Getter
-    private JSONConfiguration config;
+    private static JSONConfiguration config;
 
     /**
      * Saves a specific configuration resource file to the current working directory
@@ -45,7 +45,7 @@ public abstract class NDApp extends Application {
      */
     public void saveAndLoadConfig() throws IOException {
         saveResource("config.json");
-        this.config = JSONConfiguration.loadConfiguration(new File(System.getProperty("user.dir"), "config.json"));
+        config = JSONConfiguration.loadConfiguration(new File(System.getProperty("user.dir"), "config.json"));
     }
 
     /**

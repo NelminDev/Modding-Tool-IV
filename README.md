@@ -15,7 +15,7 @@ creating mods.
 
 ### Mod Creation
 
-- Support for creating .rpf and .img files (similar to OpenIV)
+- Support for creating .rpf and .img files (similar to OpenIV) - **Still needs a LOT of planning**
 - Custom (archive structure)[#Archive-Structure] support (zip/tar.gz/etc.)
 
 ### Backup System
