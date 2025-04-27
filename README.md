@@ -1,3 +1,5 @@
+# This project is temporarily discontinued until I find enough motivation to continue developing this project! This repository wont be archived so that pull requests still can be made!
+
 # ND Modding Tool IV
 
 A comprehensive modding tool for Grand Theft Auto IV, designed to simplify the process of installing, managing, and
